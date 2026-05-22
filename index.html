@@ -4,64 +4,230 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enterprise Dashboard Portal</title>
+
 <style>
-:root { --bg:#f4f6f8; --text:#000; --card:#fff; --header:#002050; --accent:#0078D4; }
-body.dark { --bg:#1e1e1e; --text:#fff; --card:#2c2c2c; --header:#111827; }
-body { margin:0; font-family:Segoe UI, Arial; background:var(--bg); color:var(--text);} 
-header { background:var(--header); color:white; padding:15px 25px; display:flex; justify-content:space-between; align-items:center;}
-.toggle-btn { background:var(--accent); border:none; color:white; padding:8px 12px; cursor:pointer; border-radius:4px; }
-.container { display:flex; height:calc(100vh - 60px);} 
-.sidebar { width:260px; background:var(--card); border-right:1px solid #ccc; overflow-y:auto;} 
-.department { border-bottom:1px solid #ddd; }
-.dept-header { padding:14px; cursor:pointer; font-weight:bold; transition:all 0.3s; }
-.dept-header:hover { background:rgba(0,120,212,0.1);} 
-.dashboard-list { max-height:0; overflow:hidden; transition:max-height 0.5s ease; }
+
+/* ===== GLOBAL ===== */
+body {
+    margin:0;
+    font-family: Segoe UI;
+    background:#0f172a;
+    color:white;
+}
+
+/* ===== LOGIN PAGE ===== */
+.login-page {
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#002050,#0078D4);
+}
+
+.login-box {
+    width:350px;
+    padding:30px;
+    border-radius:12px;
+    backdrop-filter:blur(20px);
+    background:rgba(255,255,255,0.1);
+    box-shadow:0 8px 30px rgba(0,0,0,0.3);
+    animation:fadeIn 0.8s ease;
+}
+
+.login-box h2 {
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.login-box input {
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:6px;
+    outline:none;
+}
+
+.login-box button {
+    width:100%;
+    padding:12px;
+    background:#0078D4;
+    border:none;
+    color:white;
+    cursor:pointer;
+    border-radius:6px;
+}
+
+.error {
+    color:#ff6b6b;
+    font-size:14px;
+    display:none;
+}
+
+/* ===== MAIN APP ===== */
+#app {
+    display:none;
+}
+
+/* HEADER */
+header {
+    background:#002050;
+    display:flex;
+    justify-content:space-between;
+    padding:15px 20px;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width:250px;
+    background:#ffffff;
+    color:black;
+    overflow-y:auto;
+}
+
+/* DEPTS */
+.department { border-bottom:1px solid #ccc; }
+.dept-header { padding:14px; cursor:pointer; font-weight:bold; }
+.dashboard-list { max-height:0; overflow:hidden; transition:0.4s;}
 .department.open .dashboard-list { max-height:300px; }
-.dashboard-item { padding:10px 20px; cursor:pointer; transition:all 0.25s; }
-.dashboard-item:hover { background:rgba(0,120,212,0.2); padding-left:26px; }
-.dashboard-item.active { background:var(--accent); color:white; }
+
+.dashboard-item { padding:10px 20px; cursor:pointer; }
+.dashboard-item:hover { background:#eee; }
+.dashboard-item.active { background:#0078D4; color:white; }
+
+/* MAIN */
+.container { display:flex; height:calc(100vh - 60px); }
 .main { flex:1; padding:20px; }
-.top { display:flex; justify-content:space-between; margin-bottom:10px; }
-.dashboard-box { height:85vh; background:var(--card); border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.2); overflow:hidden; }
-iframe { width:100%; height:100%; border:none; }
-.open-btn { padding:8px 14px; background:var(--accent); color:white; border:none; cursor:pointer; }
+.dashboard-box { height:85vh; background:#fff; }
+
+/* BUTTON */
+.btn { background:#0078D4; color:white; padding:8px; border:none;}
+
+/* ANIM */
+@keyframes fadeIn {
+    from { opacity:0; transform:translateY(20px);}
+    to { opacity:1; transform:translateY(0);}
+}
+
 </style>
+
 <script>
-const DASH_URL = "https://app.powerbi.com/reportEmbed?reportId=d8f71bdf-009f-41eb-a07e-a9899f7644ed&autoAuth=true&ctid=68e431e8-d632-483e-ae79-f28a7b4c69e6";
-function toggleDept(el){ el.parentElement.classList.toggle('open'); }
-function loadDashboard(el){ document.getElementById('frame').src=DASH_URL; document.getElementById('openLink').href=DASH_URL; document.querySelectorAll('.dashboard-item').forEach(i=>i.classList.remove('active')); el.classList.add('active'); }
-function toggleDark(){ document.body.classList.toggle('dark'); }
+
+const URL="https://app.powerbi.com/reportEmbed?reportId=d8f71bdf-009f-41eb-a07e-a9899f7644ed&autoAuth=true&ctid=68e431e8-d632-483e-ae79-f28a7b4c69e6";
+
+/* LOGIN */
+function login(){
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    if(!email.endsWith("@l-acoustics.com")){
+        showError("Use company email");
+        return;
+    }
+
+    if(password !== "Massy@1234"){
+        showError("Invalid password");
+        return;
+    }
+
+    localStorage.setItem("auth","true");
+    openApp();
+}
+
+function showError(msg){
+    const err = document.getElementById("error");
+    err.innerText = msg;
+    err.style.display = "block";
+}
+
+/* APP */
+function openApp(){
+    document.getElementById("login").style.display="none";
+    document.getElementById("app").style.display="block";
+}
+
+function logout(){
+    localStorage.removeItem("auth");
+    location.reload();
+}
+
+function toggleDept(el){
+    el.parentElement.classList.toggle("open");
+}
+
+function loadDashboard(el){
+    frame.src = URL;
+    document.querySelectorAll(".dashboard-item").forEach(i=>i.classList.remove("active"));
+    el.classList.add("active");
+}
+
+/* AUTO LOGIN */
+window.onload=()=>{
+    if(localStorage.getItem("auth")==="true"){
+        openApp();
+    }
+};
+
 </script>
+
 </head>
+
 <body>
+
+<!-- LOGIN -->
+<div id="login" class="login-page">
+<div class="login-box">
+<h2>Enterprise Portal Login</h2>
+
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+
+<div id="error" class="error"></div>
+
+<button onclick="login()">Login</button>
+</div>
+</div>
+
+
+<!-- MAIN APP -->
+<div id="app">
+
 <header>
-<span>📊 Enterprise Dashboard Portal</span>
-<button class="toggle-btn" onclick="toggleDark()">🌙 Dark</button>
+<span>📊 Enterprise Dashboard</span>
+<button class="btn" onclick="logout()">Logout</button>
 </header>
+
 <div class="container">
+
 <div class="sidebar">
+
 <script>
-const departments=["Finance","Sales","Procurement","IT","Operations"];
-document.write(departments.map(dept=>`<div class="department">
-<div class="dept-header" onclick="toggleDept(this)">${dept}</div>
+const depts=["Finance","Sales","Procurement","IT","Operations"];
+
+document.write(depts.map(d=>`
+<div class="department">
+<div class="dept-header" onclick="toggleDept(this)">${d}</div>
 <div class="dashboard-list">
 <div class="dashboard-item" onclick="loadDashboard(this)">Dashboard 1</div>
 <div class="dashboard-item" onclick="loadDashboard(this)">Dashboard 2</div>
 <div class="dashboard-item" onclick="loadDashboard(this)">Dashboard 3</div>
 <div class="dashboard-item" onclick="loadDashboard(this)">Dashboard 4</div>
-</div></div>`).join(''));
+</div>
+</div>
+`).join(""));
 </script>
+
 </div>
+
 <div class="main">
-<div class="top">
-<h3>Dashboard Viewer</h3>
-<a id="openLink" href="https://app.powerbi.com/reportEmbed?reportId=d8f71bdf-009f-41eb-a07e-a9899f7644ed" target="_blank">
-<button class="open-btn">Open in New Tab 🔗</button></a>
-</div>
 <div class="dashboard-box">
-<iframe id="frame" src="https://app.powerbi.com/reportEmbed?reportId=d8f71bdf-009f-41eb-a07e-a9899f7644ed"></iframe>
+<iframe id="frame" src=""></iframe>
 </div>
 </div>
+
 </div>
+
+</div>
+
 </body>
 </html>
