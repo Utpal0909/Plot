@@ -98,7 +98,13 @@ header {
 /* MAIN */
 .container { display:flex; height:calc(100vh - 60px); }
 .main { flex:1; padding:20px; }
-.dashboard-box { height:85vh; background:#fff; }
+.dashboard-box iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+    
 
 /* BUTTON */
 .btn { background:#0078D4; color:white; padding:8px; border:none;}
