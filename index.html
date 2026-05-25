@@ -308,7 +308,7 @@ function toggleSidebar(){
  </div>
 
  <div>
-    <button class="toggle-btn" onclick="toggleDark()">🌙</button>
+    <button class="toggle-btn" onclick="toggleDark()">🌓</button>
     <button class="toggle-btn" onclick="logout()">Logout</button>
   </div>
 </header>
@@ -336,12 +336,19 @@ document.write(departments.map(dept => `
 <!-- MAIN CONTENT -->
 <div class="main">
 
+
 <div class="top">
   <h3>Dashboard Viewer</h3>
-  <a id="openLink" target="_blank">
-    <button class="open-btn">Open in New Tab 🔗</button>
-  </a>
+
+  <div style="display:flex; gap:8px;">
+    <button class="open-btn" onclick="toggleFullScreen()">⛶</button>
+
+    <a id="openLink" target="_blank">
+      <button class="open-btn">Open in New Tab 🔗</button>
+    </a>
+  </div>
 </div>
+
 
 <div class="dashboard-box">
   <div id="loader" class="loader">Loading...</div>
