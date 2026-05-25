@@ -167,6 +167,34 @@ iframe {
   justify-content:space-between;
   margin-bottom:10px;
 }
+
+  
+/* Hamburger button */
+.menu-btn {
+  font-size:20px;
+  background:none;
+  border:none;
+  color:white;
+  cursor:pointer;
+}
+
+/* Smooth layout transition */
+.sidebar {
+  transition: all 0.3s ease;
+}
+
+/* Hide sidebar */
+.sidebar.collapsed {
+  width:0;
+  padding:0;
+  overflow:hidden;
+}
+
+/* Expand main */
+.main.expanded {
+  width:100%;
+}
+
 </style>
 
 <script>
@@ -248,6 +276,12 @@ window.onload = function(){
   },300);
 };
 
+
+function toggleSidebar(){
+  document.querySelector(".sidebar").classList.toggle("collapsed");
+  document.querySelector(".main").classList.toggle("expanded");
+}
+
 </script>
 </head>
 
@@ -268,8 +302,12 @@ window.onload = function(){
 <div id="app" style="display:none;">
 
 <header>
-  <span>📊 Enterprise Dashboard Portal</span>
-  <div>
+ <div style="display:flex; align-items:center; gap:10px;">
+   <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+   <span>📊 Enterprise Dashboard Portal</span>
+ </div>
+
+ <div>
     <button class="toggle-btn" onclick="toggleDark()">🌙</button>
     <button class="toggle-btn" onclick="logout()">Logout</button>
   </div>
