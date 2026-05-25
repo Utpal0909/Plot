@@ -176,6 +176,8 @@ Portfolio / resume project
 Training project (frontend + auth systems)
 
 
-👤 Author
+**Developer**
+
 Utpal UTKARSH
+
 Purchasing Analyst (Trainee)
