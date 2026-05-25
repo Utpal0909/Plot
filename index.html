@@ -330,6 +330,50 @@ document.write(departments.map(dept => `
   </div>
 </div>
 `).join(''));
+
+  
+function toggleFullScreen(){
+
+  const box = document.querySelector(".dashboard-box");
+
+  if (!document.fullscreenElement) {
+
+    box.requestFullscreen().then(() => {
+
+      // Hide everything except dashboard
+      document.querySelector("header").style.display = "none";
+      document.querySelector(".sidebar").style.display = "none";
+      document.querySelector(".top").style.display = "none";
+
+      // Remove padding so iframe becomes full screen
+      document.querySelector(".main").style.padding = "0";
+
+      // Expand dashboard height fully
+      box.style.height = "100vh";
+
+    }).catch(err => {
+      console.error(err);
+    });
+
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+
+document.addEventListener("fullscreenchange", () => {
+
+  if (!document.fullscreenElement) {
+
+    document.querySelector("header").style.display = "flex";
+    document.querySelector(".sidebar").style.display = "block";
+    document.querySelector(".top").style.display = "flex";
+
+    document.querySelector(".main").style.padding = "20px";
+    document.querySelector(".dashboard-box").style.height = "85vh";
+  }
+});
+
 </script>
 </div>
 
