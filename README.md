@@ -2,7 +2,7 @@
 
 A modern, enterprise-grade dashboard portal built using HTML, CSS, and JavaScript, integrating Microsoft Azure (Entra ID) authentication, role-based access control, and an enhanced user experience similar to professional BI tools such as Power BI and Tableau.
 
-** Overview** 
+**Overview** 
 This project is a fully functional BI portal UI designed to simulate a corporate dashboard system with:
 
 Secure Microsoft login (Azure AD)
