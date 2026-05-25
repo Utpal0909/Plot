@@ -15,50 +15,13 @@ Smooth UI animations
 👉 Designed as a real-world prototype for internal BI platforms
 
 🔐 Features
-✅ Authentication
+✅ Authentication ---> Ye to implement
 
 Microsoft Login (Azure / Entra ID integration)
 Only @l-acoustics.com users allowed
 Session stored using localStorage
 Secure logout functionality
 
-
-🧠 Role-Based Access Control (RBAC)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-RoleAccessMasterAll departmentsFinanceFinance dashboards onlySalesSales dashboards onlyProcurementProcurement dashboardsITIT dashboardsOperationsOperations dashboards
-👉 Roles are mapped dynamically based on user email.
 
 ⭐ Favorites System
 
