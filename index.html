@@ -362,17 +362,21 @@ const departments=["Finance","Sales","Procurement","IT","Operations"];
 
 document.write(departments.map(dept => `
 <div class="department">
-<div class="dept-header" onclick="toggleDept(this)">
-  <span class="arrow">▶</span> ${dept}
-</div>
-<div class="dashboard-list">
-    <div class="dashboard-item" onclick="loadDashboard(this, '${dept}')">Commodity Tracker Dashboard</div>
-    <div class="dashboard-item" onclick="loadDashboard(this, '${dept}')">Dashboard 2</div>
-    <div class="dashboard-item" onclick="loadDashboard(this, '${dept}')">Dashboard 3</div>
-    <div class="dashboard-item" onclick="loadDashboard(this, '${dept}')">Dashboard 4</div>
-</div>
+
+  <div class="dept-header" onclick="toggleDept(this)">
+    <span class="arrow">▶</span> ${dept}
+  </div>
+
+  <div class="dashboard-list">
+   ${(DASHBOARDS[dept] ? Object.keys(DASHBOARDS[dept]) : []).map(d =>
+     `<div class="dashboard-item" onclick="loadDashboard(this, '${dept}')">${d}</div>`
+    ).join('')}
+  </div>
+
 </div>
 `).join(''));
+
+  
   
 function toggleFullScreen(){
 
