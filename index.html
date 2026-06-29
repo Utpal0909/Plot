@@ -200,13 +200,30 @@ iframe {
 <script>
 
 /* ✅ DASHBOARDS (ADD MORE HERE IF NEEDED) */
-const DASHBOARDS = {
+
+  const DASHBOARDS = {
+  "Finance": {
   "Dashboard 1": "https://app.powerbi.com/reportEmbed?reportId=158d88e3-2659-47d3-bbd8-ca11e72ac43c&autoAuth=true&ctid=68e431e8-d632-483e-ae79-f28a7b4c69e6",
   "Dashboard 2": "https://app.powerbi.com/reportEmbed?reportId=158d88e3-2659-47d3-bbd8-ca11e72ac43c&autoAuth=true&ctid=68e431e8-d632-483e-ae79-f28a7b4c69e6",
   "Dashboard 3": "https://app.powerbi.com/reportEmbed?reportId=2f023e10-b332-48db-82ee-8b5177167d0f&autoAuth=true&ctid=68e431e8-d632-483e-ae79-f28a7b4c69e6",
   "Dashboard 4": "https://app.powerbi.com/reportEmbed?reportId=d8f71bdf-009f-41eb-a07e-a9899f7644ed&autoAuth=true&ctid=68e431e8-d632-483e-ae79-f28a7b4c69e6"
+  },
+  "Sales": {
+    "Dashboard 1": "sales_url_1",
+    "Dashboard 2": "sales_url_2",
+    "Dashboard 3": "sales_url_3",
+    "Dashboard 4": "sales_url_4"
+  },
+  "Procurement": {
+    "Dashboard 1": "...",
+    "Dashboard 2": "...",
+    "Dashboard 3": "...",
+    "Dashboard 4": "..."
+  },
+  "IT": { ... },
+  "Operations": { ... }
 };
-
+  
 /* LOGIN */
 function login(){
   const email = document.getElementById("email").value;
@@ -233,24 +250,26 @@ function logout(){
 }
 
 /* LOAD DASHBOARD */
-function loadDashboard(el){
+function loadDashboard(el, dept){
   const loader = document.getElementById("loader");
   const frame = document.getElementById("frame");
 
-  loader.style.display="block";
+  loader.style.display = "block";
 
   const name = el.innerText;
-  const url = DASHBOARDS[name];
+  const url = DASHBOARDS[dept][name];  
 
-  frame.onload = () => loader.style.display="none";
-
+  frame.onload = () => loader.style.display = "none";
   frame.src = url;
+
   document.getElementById("openLink").href = url;
 
-  document.querySelectorAll(".dashboard-item").forEach(i=>i.classList.remove("active"));
+  document.querySelectorAll(".dashboard-item")
+    .forEach(i => i.classList.remove("active"));
+
   el.classList.add("active");
 }
-
+  
 /* TOGGLE DEPARTMENT */
 function toggleDept(el){
   el.parentElement.classList.toggle("open");
@@ -319,18 +338,18 @@ function toggleSidebar(){
 <div class="sidebar">
 <script>
 const departments=["Finance","Sales","Procurement","IT","Operations"];
+
 document.write(departments.map(dept => `
 <div class="department">
   <div class="dept-header" onclick="toggleDept(this)">${dept}</div>
   <div class="dashboard-list">
-    <div class="dashboard-item" onclick="loadDashboard(this)">Dashboard 1</div>
-    <div class="dashboard-item" onclick="loadDashboard(this)">Dashboard 2</div>
-    <div class="dashboard-item" onclick="loadDashboard(this)">Dashboard 3</div>
-    <div class="dashboard-item" onclick="loadDashboard(this)">Dashboard 4</div>
+    <div class="dashboard-item" onclick="loadDashboard(this, '${dept}')">Dashboard 1</div>
+    <div class="dashboard-item" onclick="loadDashboard(this, '${dept}')">Dashboard 2</div>
+    <div class="dashboard-item" onclick="loadDashboard(this, '${dept}')">Dashboard 3</div>
+    <div class="dashboard-item" onclick="loadDashboard(this, '${dept}')">Dashboard 4</div>
   </div>
 </div>
 `).join(''));
-
   
 function toggleFullScreen(){
 
