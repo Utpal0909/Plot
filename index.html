@@ -426,17 +426,21 @@ document.addEventListener("fullscreenchange", () => {
 <!-- MAIN CONTENT -->
 <div class="main">
 
-
-<div class="top">
-  <div style="display:flex; gap:4px;">
-    <button class="open-btn" onclick="toggleFullScreen()">⛶</button>
-
-    <a id="openLink" target="_blank">
-      <button class="open-btn">New Tab ⇗ </button>
-    </a>
+  <div class="dashboard-box">
+    <iframe></iframe>
   </div>
-</div>
 
+  <div class="top">
+    <div>
+      <button class="open-btn" onclick="toggleFullScreen()">⛶</button>
+
+      <a id="openLink" target="_blank">
+        <button class="open-btn">Open in New Tab 🔗</button>
+      </a>
+    </div>
+  </div>
+
+</div>
 
 <div class="dashboard-box">
   <div id="loader" class="loader">Loading...</div>
