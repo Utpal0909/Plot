@@ -237,6 +237,12 @@ iframe {
   transform: rotate(90deg);
 }
 
+  
+.header-logo{
+  height:24px;
+  width:auto;
+  display:block;
+}
 
 </style>
 
@@ -374,10 +380,13 @@ function toggleSidebar(){
 <div id="app" style="display:none;">
 
 <header>
- <div style="display:flex; align-items:center; gap:10px;">
+
+<div style="display:flex; align-items:center; gap:10px;">
    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-   <span> L-acoustics Dashboard Portal</span>
- </div>
+
+   <img src="Logo.png"
+        alt="L-Acoustics"
+        classv>
 
  <div>
     <button class="toggle-btn" onclick="toggleDark()">☀</button>
