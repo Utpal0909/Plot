@@ -82,10 +82,11 @@ header {
 }
 
 .sidebar {
-  width:260px;
-  background:var(--card);
-  border-right:1px solid #ccc;
+  width:280px;
+  background:#ffffff;
+  border-right:1px solid #e5e7eb;
   overflow-y:auto;
+  box-shadow:2px 0 10px rgba(0,0,0,0.05);
 }
 
 .department {
@@ -93,9 +94,16 @@ header {
 }
 
 .dept-header {
-  padding:14px;
+  padding:16px 18px;
   cursor:pointer;
-  font-weight:bold;
+  font-weight:600;
+  font-size:15px;
+  background:#fafafa;
+  transition:all .2s ease;
+}
+
+.dept-header:hover {
+  background:#f1f5f9;
 }
 
 .dashboard-list {
@@ -108,19 +116,35 @@ header {
   max-height:300px;
 }
 
+
 .dashboard-item {
-  padding:10px 20px;
+  padding:12px 20px;
+  margin:4px 8px;
+  border-radius:8px;
   cursor:pointer;
+  transition:all .2s ease;
 }
 
 .dashboard-item:hover {
-  background:rgba(0,120,212,0.2);
+  background:#e8f1fb;
+  transform:translateX(4px);
 }
 
+
+
 .dashboard-item.active {
-  background:var(--accent);
+  background:linear-gradient(
+    135deg,
+    #0078D4,
+    #106EBE
+  );
+
   color:white;
+
+  box-shadow:
+    0 4px 12px rgba(0,120,212,.25);
 }
+
 
 .main {
   flex:1;
@@ -130,9 +154,10 @@ header {
 .dashboard-box {
   position:relative;
   height:85vh;
-  background:var(--card);
-  border-radius:8px;
+  background:white;
+  border-radius:12px;
   overflow:hidden;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
 }
 
 /* CRITICAL: DO NOT REMOVE */
@@ -371,7 +396,7 @@ document.write(departments.map(dept => `
 <div class="department">
 
   <div class="dept-header" onclick="toggleDept(this)">
-    <span class="arrow">▶</span> ${dept}
+    <span class="arrow">▸</span> ${dept}
   </div>
 
   <div class="dashboard-list">
@@ -445,10 +470,6 @@ document.addEventListener("fullscreenchange", () => {
       <button class="open-btn">New Tab ↗️</button>
     </a>
   </div>
-
-</div>
-
-</div>
 
 </div>
 
