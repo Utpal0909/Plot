@@ -168,6 +168,13 @@ iframe {
   margin-bottom:10px;
 }
 
+.bottom-toolbar {
+  display:flex;
+  justify-content:flex-end;
+  gap:4px;
+  margin-top:10px;
+}
+
   
 /* Hamburger button */
 .menu-btn {
@@ -389,7 +396,7 @@ function toggleFullScreen(){
       // Hide everything except dashboard
       document.querySelector("header").style.display = "none";
       document.querySelector(".sidebar").style.display = "none";
-      document.querySelector(".top").style.display = "none";
+
 
       // Remove padding so iframe becomes full screen
       document.querySelector(".main").style.padding = "0";
@@ -413,7 +420,7 @@ document.addEventListener("fullscreenchange", () => {
 
     document.querySelector("header").style.display = "flex";
     document.querySelector(".sidebar").style.display = "block";
-    document.querySelector(".top").style.display = "flex";
+    
 
     document.querySelector(".main").style.padding = "20px";
     document.querySelector(".dashboard-box").style.height = "85vh";
@@ -426,23 +433,23 @@ document.addEventListener("fullscreenchange", () => {
 <!-- MAIN CONTENT -->
 <div class="main">
 
-
-<div class="top">
   <h3>Dashboard Viewer</h3>
 
-  <div style="display:flex; gap:4px;">
+  <div class="dashboard-box">
+    <div id="loader" class="loader">Loading...</div>
+    <iframe id="frame"></iframe>
+  </div>
+
+  <div class="bottom-toolbar">
     <button class="open-btn" onclick="toggleFullScreen()">⛶</button>
 
     <a id="openLink" target="_blank">
       <button class="open-btn">Open in New Tab 🔗</button>
     </a>
   </div>
+
 </div>
 
-
-<div class="dashboard-box">
-  <div id="loader" class="loader">Loading...</div>
-  <iframe id="frame"></iframe>
 </div>
 
 </div>
