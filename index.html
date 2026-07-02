@@ -111,16 +111,18 @@ header {
 .dashboard-list {
   max-height:0;
   overflow:hidden;
-  transition:max-height 0.3s;
+  transition:max-height 0.3s ease;
+  background:#f8f9fb;
+  border-left:4px solid #B28627;
+  margin-left:12px;
 }
 
 .department.open .dashboard-list {
   max-height:300px;
 }
 
-
 .dashboard-item {
-  padding:12px 20px;
+  padding:12px 16px 12px 24px;
   margin:4px 8px;
   border-radius:8px;
   cursor:pointer;
@@ -132,6 +134,13 @@ header {
   transform:translateX(4px);
 }
 
+
+.department.open .dept-header {
+  background:#f3efe4;
+  color:#B28627;
+  font-weight:700;
+}
+  
 .dashboard-item.active {
   background:linear-gradient(
     135deg,
