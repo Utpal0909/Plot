@@ -122,8 +122,10 @@ header {
 
 .department.open .dashboard-list {
   max-height:300px;
+  border-left: 6px solid #9A7722;
+  transition: border-left .3s ease;
 }
-  
+
 .dashboard-item {
   padding:14px 20px;
   background: #efefef;
@@ -224,9 +226,12 @@ iframe {
 }
 
 /* Smooth layout transition */
+
 .sidebar {
-  transition: all 0.3s ease;
+    transition:
+        width 0.35s cubic-bezier(.4,0,.2,1);
 }
+
 
 /* Hide sidebar */
 .sidebar.collapsed {
