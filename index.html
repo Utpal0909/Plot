@@ -307,18 +307,7 @@ iframe {
   }
 };
   
-/* LOGIN */
-function login(){
-  const email = document.getElementById("email").value;
-  const pass = document.getElementById("pass").value;
 
-  if(email.endsWith("@l-acoustics.com") && pass === "Massy@123"){
-    localStorage.setItem("auth","true");
-    showApp();
-  } else {
-    document.getElementById("error").style.display="block";
-  }
-}
 
 /* SHOW APP */
 function showApp(){
