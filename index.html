@@ -306,7 +306,19 @@ iframe {
   "Dashboard 4": "https://app.powerbi.com/reportEmbed?reportId=d8f71bdf-009f-41eb-a07e-a9899f7644ed&autoAuth=true&ctid=68e431e8-d632-483e-ae79-f28a7b4c69e6"
   }
 };
-  
+
+/* LOGIN */
+function login(){
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("pass").value;
+
+  if(email.endsWith("@l-acoustics.com") && pass === "Massy@123"){
+    localStorage.setItem("auth","true");
+    showApp();
+  } else {
+    document.getElementById("error").style.display="block";
+  }
+}
 
 
 /* SHOW APP */
