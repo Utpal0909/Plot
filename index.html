@@ -431,6 +431,7 @@ function loadDashboard(el, dept){
   loader.style.display = "block";
 
   const name = el.querySelector("span").innerText.trim();
+  document.getElementById("currentDashboard").innerText = name;
   const url = DASHBOARDS[dept][name];
 
   frame.onload = () => loader.style.display = "none";
@@ -559,14 +560,24 @@ function toggleSidebar(){
 
 <header>
 
-  <div style="display:flex; align-items:center; gap:10px;">
+<div style="display:flex; align-items:center; gap:10px;">
     <button class="menu-btn" onclick="toggleSidebar()">☰</button>
 
     <img src="Logo.png"
          alt="L-Acoustics"
          class="header-logo">
-  </div>
 
+    <span id="currentDashboard"
+          style="
+            color:white;
+            font-size:18px;
+            font-weight:600;
+            margin-left:10px;
+          ">
+        Home
+    </span>
+</div>
+  
   <div>
     <button class="toggle-btn" onclick="toggleDark()">☀</button>
     <button class="toggle-btn" onclick="logout()">Exit</button>
