@@ -58,10 +58,11 @@ body.dark input {
 }
 
 
-body.dark #dashboardSearch {
-    background: #383838;
-    color: white;
-    border: 1px solid #555;
+body.dark #dashboardSearch{
+    background:#2f2f2f;
+    color:white;
+    border:1px solid #555;
+    box-shadow:0 2px 6px rgba(0,0,0,.3);
 }
 
 body {
@@ -245,6 +246,35 @@ iframe {
   font-size:18px;
 }
 
+#dashboardSearch{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid #d6d6d6;
+    border-radius:12px;
+    font-size:14px;
+    transition:all .25s ease;
+    box-sizing:border-box;
+    box-shadow:0 2px 6px rgba(0,0,0,.05);
+    background:white;
+}
+
+#dashboardSearch:focus{
+    outline:none;
+    border-color:#B28627;
+    box-shadow:0 0 0 3px rgba(178,134,39,.15);
+}
+
+body.dark .department.open .dept-header {
+    background:#353535;
+    color:#D4A63A;
+}
+
+.toggle-btn:hover,
+.open-btn:hover{
+    opacity:.9;
+    transform:translateY(-1px);
+}
+  
 /* Buttons */
 .toggle-btn, .open-btn {
   background:var(--accent);
@@ -421,8 +451,14 @@ function toggleDept(el){
 
 /* DARK MODE */
 function toggleDark(){
+
   document.body.classList.toggle("dark");
+
+  localStorage.setItem(
+      "darkMode",
+      document.body.classList.contains("dark") );
 }
+
 
 /* AUTO LOAD */
 window.onload = function(){
@@ -548,15 +584,7 @@ function toggleSidebar(){
         id="dashboardSearch"
         type="text"
         placeholder="🔍 Search..."
-        onkeyup="filterDashboards()"
-        style="
-            width:100%;
-            padding:10px;
-            border:1px solid #d1d5db;
-            border-radius:8px;
-            box-sizing:border-box;
-            font-size:14px;
-        ">
+        onkeyup="filterDashboards()" >
 </div>
 
 <script>
