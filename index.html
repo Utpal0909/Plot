@@ -420,7 +420,42 @@ event.target.innerText =
         favorites.includes(dashboard) ? '⭐' : '☆';
 
 }
-  
+
+function filterDashboards() {
+
+    const search =
+        document.getElementById("dashboardSearch")
+        .value
+        .toLowerCase();
+
+    document.querySelectorAll(".department")
+        .forEach(dept => {
+
+            let found = false;
+
+            dept.querySelectorAll(".dashboard-item")
+                .forEach(item => {
+
+                    const text =
+                        item.querySelector("span")
+                        .innerText
+                        .toLowerCase();
+
+                    const match =
+                        text.includes(search);
+
+                    item.style.display =
+                        match ? "flex" : "none";
+
+                    if(match) found = true;
+                });
+
+            if(search.length > 0 && found){
+                dept.classList.add("open");
+            }
+        });
+}
+
 function toggleSidebar(){
   document.querySelector(".sidebar").classList.toggle("collapsed");
   document.querySelector(".main").classList.toggle("expanded");
@@ -466,7 +501,25 @@ function toggleSidebar(){
 
 <!-- SIDEBAR -->
 <div class="sidebar">
+  
+<div style="padding:10px;">
+    <input
+        id="dashboardSearch"
+        type="text"
+        placeholder="🔍 Search dashboards..."
+        onkeyup="filterDashboards()"
+        style="
+            width:100%;
+            padding:10px;
+            border:1px solid #d1d5db;
+            border-radius:8px;
+            box-sizing:border-box;
+            font-size:14px;
+        ">
+</div>
+
 <script>
+
 
 if(favorites.length > 0){
 
