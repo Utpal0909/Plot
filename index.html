@@ -415,7 +415,10 @@ function toggleFavorite(event, dept, dashboard) {
         JSON.stringify(favorites)
     );
 
-    location.reload();
+
+event.target.innerText =
+        favorites.includes(dashboard) ? '⭐' : '☆';
+
 }
   
 function toggleSidebar(){
