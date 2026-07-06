@@ -145,6 +145,18 @@ header {
 }
 
 
+.dashboard-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.favorite{
+    cursor:pointer;
+    font-size:18px;
+}
+
+
 .department.open .dept-header {
   background:#f3efe4;
   color:#B28627;
@@ -308,6 +320,10 @@ iframe {
   }
 };
 
+let favorites = JSON.parse(
+  localStorage.getItem("favorites") || "[]"
+);
+  
 /* LOGIN */
 function login(){
   const email = document.getElementById("email").value;
@@ -380,7 +396,26 @@ window.onload = function(){
   },300);
 };
 
+function toggleFavorite(event, dept, dashboard) {
 
+    event.stopPropagation();
+
+    const index = favorites.indexOf(dashboard);
+
+    if(index > -1){
+        favorites.splice(index,1);
+    } else {
+        favorites.push(dashboard);
+    }
+
+    localStorage.setItem(
+        "favorites",
+        JSON.stringify(favorites)
+    );
+
+    location.reload();
+}
+  
 function toggleSidebar(){
   document.querySelector(".sidebar").classList.toggle("collapsed");
   document.querySelector(".main").classList.toggle("expanded");
@@ -427,7 +462,37 @@ function toggleSidebar(){
 <!-- SIDEBAR -->
 <div class="sidebar">
 <script>
-const departments=["Purchase","Sales","Finance","IT","Operations"];
+
+if(favorites.length > 0){
+
+    DASHBOARDS["⭐ Favorites"] = {};
+
+    Object.keys(DASHBOARDS).forEach(dept => {
+
+        Object.keys(DASHBOARDS[dept]).forEach(dash => {
+
+            if(favorites.includes(dash)){
+
+                DASHBOARDS["⭐ Favorites"][dash] =
+                    DASHBOARDS[dept][dash];
+            }
+
+        });
+
+    });
+
+}
+  
+
+const departments = [
+   "⭐ Favorites",
+   "Purchase",
+   "Sales",
+   "Finance",
+   "IT",
+   "Operations"
+];
+
 
 document.write(departments.map(dept => `
 <div class="department">
@@ -438,7 +503,18 @@ document.write(departments.map(dept => `
 
   <div class="dashboard-list">
    ${(DASHBOARDS[dept] ? Object.keys(DASHBOARDS[dept]) : []).map(d =>
-     `<div class="dashboard-item" onclick="loadDashboard(this, '${dept}')">${d}</div>`
+
+     `<div class="dashboard-item">
+    <span onclick="loadDashboard(this.parentElement, '${dept}')">
+        ${d}
+    </span>
+
+    <span
+        class="favorite"
+        onclick="toggleFavorite(event,'${dept}','${d}')">
+        ${favorites.includes(d) ? '⭐' : '☆'}
+    </span>
+</div>`                                                                 
     ).join('')}
   </div>
 
