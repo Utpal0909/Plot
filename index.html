@@ -604,6 +604,8 @@ function toggleSidebar(){
         id="dashboardSearch"
         type="text"
         placeholder="🔍 Search..."
+        onclick="this.placeholder=''"
+        onblur="this.placeholder='🔍 Search...'"
         onkeyup="filterDashboards()" >
 </div>
 
