@@ -351,14 +351,16 @@ function logout(){
 }
 
 /* LOAD DASHBOARD */
+
 function loadDashboard(el, dept){
+
   const loader = document.getElementById("loader");
   const frame = document.getElementById("frame");
 
   loader.style.display = "block";
 
-  const name = el.innerText;
-  const url = DASHBOARDS[dept][name];  
+  const name = el.querySelector("span").innerText.trim();
+  const url = DASHBOARDS[dept][name];
 
   frame.onload = () => loader.style.display = "none";
   frame.src = url;
@@ -484,14 +486,10 @@ if(favorites.length > 0){
 }
   
 
-const departments = [
-   "⭐ Favorites",
-   "Purchase",
-   "Sales",
-   "Finance",
-   "IT",
-   "Operations"
-];
+
+const departments = favorites.length > 0
+  ? ["⭐ Favorites","Purchase","Sales","Finance","IT","Operations"]
+  : ["Purchase","Sales","Finance","IT","Operations"];
 
 
 document.write(departments.map(dept => `
