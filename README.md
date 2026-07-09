@@ -140,7 +140,6 @@ Training project (frontend + auth systems)
 
 
 **Developer**
-
 Utpal UTKARSH
 
 Purchasing Analyst (Trainee)
